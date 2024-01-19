@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://6oaml7vrl8du"]
 
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_0r7lr"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_3vkut"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a8k4e"]
 size = Vector2(48, 48)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-script = ExtResource("1_0r7lr")
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_3vkut")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-24, -24, -24, 24, 24, 24, 24, -24)
