@@ -23,7 +23,10 @@ public partial class Player : CharacterBody2D
 
         if (!IsOnFloor())
         {
-            animationPlayer.Stop();
+            if (!animationPlayer.CurrentAnimation.StartsWith("attack"))
+            {
+                animationPlayer.Stop();
+            }
             velocity.Y += gravity * (float)delta;
         }
 
@@ -32,21 +35,33 @@ public partial class Player : CharacterBody2D
             velocity.Y = JumpVelocity;
         }
 
+        if (Input.IsActionJustPressed("attack1"))
+        {
+            animationPlayer.Play("attack1");
+        }
+
         float direction = Input.GetAxis("move_left", "move_right");
 
-        if (direction != 0)
+        if (!(animationPlayer.CurrentAnimation.StartsWith("attack") && animationPlayer.IsPlaying()))
         {
-            velocity.X = direction * Speed;
+            if (direction != 0)
+            {
+                velocity.X = direction * Speed;
 
-            sprite2D.FlipH = velocity.X < 0;
+                sprite2D.FlipH = velocity.X < 0;
 
-            animationPlayer.Play("run");
+                animationPlayer.Play("run");
+            }
+            else
+            {
+                velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+
+                animationPlayer.Play("idle");
+            }
         }
-        else
+        else if (IsOnFloor() || direction == 0)
         {
-            velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-
-            animationPlayer.Play("idle");
+            velocity.X = 0;
         }
 
         Velocity = velocity;
