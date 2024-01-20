@@ -82,6 +82,8 @@ height = 16.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_3vkut")
+Speed = 150.0
+JumpVelocity = -300.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
