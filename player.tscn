@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://6oaml7vrl8du"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_3vkut"]
-[ext_resource type="Texture2D" uid="uid://hrnij4q43dr8" path="res://Art/CharacterSpriteSheet.png" id="2_bljmd"]
+[ext_resource type="Texture2D" uid="uid://lfrybvn6uo2x" path="res://Art/CharacterSpriteSheet2.png" id="2_ucty5"]
 [ext_resource type="Script" path="res://Scripts/HitBox.cs" id="3_m27ao"]
 [ext_resource type="Script" path="res://Scripts/HealthBar.cs" id="4_63sn8"]
 [ext_resource type="Script" path="res://Scripts/HurtBox.cs" id="5_sbk8u"]
@@ -107,7 +107,7 @@ _data = {
 size = Vector2(10, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s6iin"]
-size = Vector2(13, 8)
+size = Vector2(18, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2w63"]
 size = Vector2(9, 11)
@@ -122,10 +122,12 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_bljmd")
-hframes = 13
+position = Vector2(3, 0)
+texture = ExtResource("2_ucty5")
+hframes = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, 2.5)
 shape = SubResource("RectangleShape2D_tjwta")
 
@@ -135,7 +137,7 @@ collision_mask = 0
 script = ExtResource("3_m27ao")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(4.5, 3)
+position = Vector2(5, 1)
 shape = SubResource("RectangleShape2D_s6iin")
 disabled = true
 
@@ -145,9 +147,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -6.0
+offset_left = -5.0
 offset_top = -8.0
-offset_right = 4.0
+offset_right = 5.0
 offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -170,6 +172,7 @@ custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("healthBar")]
+visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_sbk8u")
