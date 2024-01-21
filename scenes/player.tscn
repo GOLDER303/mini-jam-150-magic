@@ -177,7 +177,7 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_sbk8u")
 healthBar = NodePath("../HealthBar")
-arrayList = PackedStringArray("enemy")
+damagedByGroups = PackedStringArray("enemy", "enemy_bullet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(-0.5, 2.5)

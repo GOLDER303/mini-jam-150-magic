@@ -7,14 +7,18 @@ public partial class FlyingEnemy : CharacterBody2D
     private float speed = 30.0f;
 
     [Export]
-    private float attackRange = 50.0f;
+    private float attackRange = 130.0f;
 
     [Export]
     private Player player;
 
+    [Export]
+    private PackedScene bullet;
+
     private AnimationPlayer animationPlayer;
     private Sprite2D sprite2D;
     private Timer attackTimer;
+    private Marker2D shootingPoint;
 
     public override void _Ready()
     {
@@ -23,6 +27,7 @@ public partial class FlyingEnemy : CharacterBody2D
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         sprite2D = GetNode<Sprite2D>("Sprite2D");
         attackTimer = GetNode<Timer>("AttackTimer");
+        shootingPoint = GetNode<Marker2D>("ShootingPoint");
 
         attackTimer.Timeout += OnAttackTimerTimeout;
 
@@ -49,11 +54,28 @@ public partial class FlyingEnemy : CharacterBody2D
 
         velocity.X = direction * speed;
 
-        float playerDistance = Mathf.Abs(player.Position.X - Position.X);
-
         Velocity = velocity;
         MoveAndSlide();
     }
 
-    private void OnAttackTimerTimeout() { }
+    private void OnAttackTimerTimeout()
+    {
+        Shoot();
+    }
+
+    private void Shoot()
+    {
+        if (GlobalPosition.DistanceTo(player.GlobalPosition) > attackRange)
+        {
+            return;
+        }
+
+        Bullet newBullet = bullet.Instantiate() as Bullet;
+
+        newBullet.AddToGroup("enemy_bullet");
+        newBullet.GlobalPosition = shootingPoint.GlobalPosition;
+        newBullet.LookAt(player.GlobalPosition);
+
+        GetTree().Root.AddChild(newBullet);
+    }
 }

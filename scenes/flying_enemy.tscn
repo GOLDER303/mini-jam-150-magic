@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjmckefpuju2v"]
+[gd_scene load_steps=11 format=3 uid="uid://bjmckefpuju2v"]
 
 [ext_resource type="Script" path="res://Scripts/FlyingEnemy.cs" id="1_en6o4"]
 [ext_resource type="Texture2D" uid="uid://k5xk2mmd8wt7" path="res://Art/FlyingEnemySpriteSheet.png" id="2_hxghd"]
+[ext_resource type="PackedScene" uid="uid://bpp881drk3fw5" path="res://scenes/red_bullet.tscn" id="2_sp76g"]
 [ext_resource type="Script" path="res://Scripts/HurtBox.cs" id="4_rpm60"]
 [ext_resource type="Script" path="res://Scripts/HealthBar.cs" id="5_bdygg"]
 
@@ -53,6 +54,7 @@ size = Vector2(14, 15)
 [node name="FlyingEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 0
 script = ExtResource("1_en6o4")
+bullet = ExtResource("2_sp76g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -69,14 +71,14 @@ texture = ExtResource("2_hxghd")
 hframes = 6
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 4.0
+autostart = true
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("healthBar")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_rpm60")
 healthBar = NodePath("../HealthBar")
-arrayList = PackedStringArray("player")
+damagedByGroups = PackedStringArray("player", "player_bullet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 0.5)
@@ -105,4 +107,4 @@ custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 
 [node name="ShootingPoint" type="Marker2D" parent="."]
-position = Vector2(-6, 6)
+position = Vector2(-6, 7)
