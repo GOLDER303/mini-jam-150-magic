@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cwa3b8wtwyddj"]
 
-[ext_resource type="PackedScene" uid="uid://6oaml7vrl8du" path="res://player.tscn" id="1_3y8qe"]
+[ext_resource type="PackedScene" uid="uid://6oaml7vrl8du" path="res://scenes/player.tscn" id="1_3y8qe"]
 [ext_resource type="Texture2D" uid="uid://c7dreqlr5xg5s" path="res://Art/tilemap.png" id="2_kedut"]
-[ext_resource type="PackedScene" uid="uid://1byb5l1f7tdp" path="res://ground_enemy.tscn" id="3_blhtf"]
+[ext_resource type="PackedScene" uid="uid://1byb5l1f7tdp" path="res://scenes/ground_enemy.tscn" id="3_blhtf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mfss1"]
 texture = ExtResource("2_kedut")
