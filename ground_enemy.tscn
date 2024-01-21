@@ -1,7 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://1byb5l1f7tdp"]
+[gd_scene load_steps=13 format=3 uid="uid://1byb5l1f7tdp"]
 
 [ext_resource type="Script" path="res://Scripts/GroundEnemy.cs" id="1_b0nq5"]
 [ext_resource type="Texture2D" uid="uid://iysq2p6mkfmv" path="res://Art/GroundEnemySpriteSheet.png" id="2_jv282"]
+[ext_resource type="Script" path="res://Scripts/HitBox.cs" id="3_2dl8x"]
+[ext_resource type="Script" path="res://Scripts/HurtBox.cs" id="4_pg762"]
+[ext_resource type="Script" path="res://Scripts/HealthBar.cs" id="5_rcgue"]
 
 [sub_resource type="Animation" id="Animation_a71kw"]
 length = 0.001
@@ -74,12 +77,16 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mg7vh"]
 radius = 2.0
-height = 16.0
+height = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s6iin"]
 size = Vector2(5, 3)
 
-[node name="GroundEnemy" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7dqym"]
+size = Vector2(16, 8)
+
+[node name="GroundEnemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 0
 script = ExtResource("1_b0nq5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -97,11 +104,49 @@ texture = ExtResource("2_jv282")
 hframes = 13
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_2dl8x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(-5.5, 6.5)
 shape = SubResource("RectangleShape2D_s6iin")
-disabled = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("healthBar")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_pg762")
+healthBar = NodePath("../HealthBar")
+arrayList = PackedStringArray("player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_7dqym")
+
+[node name="HealthBar" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_right = 3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+script = ExtResource("5_rcgue")
+metadata/_edit_use_anchors_ = true
+
+[node name="Heart1" type="ColorRect" parent="HealthBar"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+
+[node name="Heart2" type="ColorRect" parent="HealthBar"]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
