@@ -22,6 +22,15 @@ public partial class GroundEnemy : CharacterBody2D
     private bool isPreparingToAttack = false;
     private bool isAttacking = false;
 
+    enum States
+    {
+        Moving,
+        PreparingToAttack,
+        Attacking
+    }
+
+    States currentState = States.Moving;
+
     public override void _Ready()
     {
         base._Ready();
@@ -30,7 +39,7 @@ public partial class GroundEnemy : CharacterBody2D
         sprite2D = GetNode<Sprite2D>("Sprite2D");
         attackTimer = GetNode<Timer>("AttackTimer");
 
-		attackTimer.Timeout += OnAttackTimerTimeout;
+        attackTimer.Timeout += OnAttackTimerTimeout;
 
         animationPlayer.Play("move");
     }
@@ -40,57 +49,69 @@ public partial class GroundEnemy : CharacterBody2D
         int direction = -1;
         Vector2 velocity = Velocity;
 
-        if (!isPreparingToAttack && !isAttacking)
+        switch (currentState)
         {
-            if (player.Position.X < Position.X)
-            {
-                sprite2D.FlipH = false;
-                direction = -1;
-            }
-            else
-            {
-                sprite2D.FlipH = true;
-                direction = 1;
-            }
+            case States.Moving:
+                if (player.Position.X < Position.X)
+                {
+                    sprite2D.FlipH = false;
+                    direction = -1;
+                }
+                else
+                {
+                    sprite2D.FlipH = true;
+                    direction = 1;
+                }
 
-            velocity.X = direction * speed;
-        }
-        else if (isAttacking)
-        {
-            velocity.X = direction * attackSpeed;
+                velocity.X = direction * speed;
+
+                float playerDistance = Mathf.Abs(player.Position.X - Position.X);
+
+                if (playerDistance <= attackRange)
+                {
+                    currentState = States.PreparingToAttack;
+                }
+                break;
+
+            case States.PreparingToAttack:
+                velocity = Vector2.Zero;
+                if (!animationPlayer.CurrentAnimation.Contains("attack"))
+                {
+                    animationPlayer.Play("attack1");
+                }
+                break;
+
+            case States.Attacking:
+                if (sprite2D.FlipH)
+                {
+                    direction = 1;
+                }
+                else
+                {
+                    direction = -1;
+                }
+
+                velocity.X = direction * attackSpeed;
+                break;
+
+            default:
+                break;
         }
 
         Velocity = velocity;
         MoveAndSlide();
-
-        float playerDistance = Mathf.Abs(player.Position.X - Position.X);
-
-        if (playerDistance <= attackRange)
-        {
-            PrepareToAttack();
-        }
     }
 
-    private void PrepareToAttack()
-    {
-        if (!isAttacking)
-        {
-            Velocity = Vector2.Zero;
-            isPreparingToAttack = true;
-            animationPlayer.Play("attack1");
-            attackTimer.Start();
-        }
-    }
-
+    // The function is triggered by the attack1 animation
     private void Attack()
     {
-        isAttacking = true;
+        currentState = States.Attacking;
+        attackTimer.Start();
     }
 
     private void OnAttackTimerTimeout()
     {
-        isAttacking = false;
-        isPreparingToAttack = false;
+        currentState = States.Moving;
         animationPlayer.Play("move");
     }
 }
