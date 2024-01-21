@@ -6,7 +6,7 @@ public partial class HurtBox : Area2D
     private HealthBar healthBar;
 
     [Export]
-    private string[] arrayList;
+    private string[] damagedByGroups;
 
     public HurtBox()
     {
@@ -25,9 +25,9 @@ public partial class HurtBox : Area2D
     {
         bool shouldBeHurt = false;
 
-        foreach (var ele in arrayList)
+        foreach (var damagedByGroup in damagedByGroups)
         {
-            if (area2D.Owner.IsInGroup(ele))
+            if (area2D.Owner.IsInGroup(damagedByGroup))
             {
                 shouldBeHurt = true;
                 break;
