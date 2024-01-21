@@ -9,13 +9,11 @@ public partial class Player : CharacterBody2D
     public float JumpVelocity = -300.0f;
 
     private AnimationPlayer animationPlayer;
-    private Sprite2D sprite2D;
 
     public override void _Ready()
     {
         base._Ready();
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        sprite2D = GetNode<Sprite2D>("Sprite2D");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -51,7 +49,16 @@ public partial class Player : CharacterBody2D
             {
                 velocity.X = direction * Speed;
 
-                sprite2D.FlipH = velocity.X < 0;
+                if (velocity.X > 0)
+                {
+                    Scale = new Vector2(Scale.X, 1);
+                    RotationDegrees = 0;
+                }
+                else
+                {
+                    Scale = new Vector2(Scale.X, -1);
+                    RotationDegrees = 180;
+                }
 
                 animationPlayer.Play("run");
             }
