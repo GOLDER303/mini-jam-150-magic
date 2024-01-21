@@ -54,12 +54,14 @@ public partial class GroundEnemy : CharacterBody2D
             case States.Moving:
                 if (player.Position.X < Position.X)
                 {
-                    sprite2D.FlipH = false;
+                    Scale = new Vector2(Scale.X, 1);
+                    RotationDegrees = 0;
                     direction = -1;
                 }
                 else
                 {
-                    sprite2D.FlipH = true;
+                    Scale = new Vector2(Scale.X, -1);
+                    RotationDegrees = 180;
                     direction = 1;
                 }
 
