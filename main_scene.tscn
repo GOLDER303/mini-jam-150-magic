@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwa3b8wtwyddj"]
+[gd_scene load_steps=6 format=3 uid="uid://cwa3b8wtwyddj"]
 
 [ext_resource type="PackedScene" uid="uid://6oaml7vrl8du" path="res://player.tscn" id="1_3y8qe"]
 [ext_resource type="Texture2D" uid="uid://c7dreqlr5xg5s" path="res://Art/tilemap.png" id="2_kedut"]
+[ext_resource type="PackedScene" uid="uid://1byb5l1f7tdp" path="res://ground_enemy.tscn" id="3_blhtf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mfss1"]
 texture = ExtResource("2_kedut")
@@ -22,7 +23,7 @@ offset_bottom = 640.0
 color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_3y8qe")]
-position = Vector2(24, 112)
+position = Vector2(24, 128)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-40, -152)
@@ -30,3 +31,7 @@ tile_set = SubResource("TileSet_1cw6g")
 format = 2
 layer_0/name = "Ground"
 layer_0/tile_data = PackedInt32Array(1179648, 65536, 0, 1179649, 65536, 0, 1179650, 65536, 0, 1179651, 65536, 0, 1179652, 65536, 0, 1179653, 65536, 0, 1179654, 65536, 0, 1179655, 65536, 0, 1179656, 65536, 0, 1179657, 65536, 0, 1179658, 65536, 0, 1179659, 65536, 0, 1179660, 65536, 0, 1179661, 65536, 0, 1179662, 65536, 0, 1179663, 65536, 0, 1179664, 65536, 0, 1179665, 65536, 0, 1179666, 65536, 0, 1179667, 65536, 0, 1179668, 65536, 0, 1179669, 65536, 0, 1179670, 65536, 0, 1179671, 65536, 0, 1179672, 65536, 0, 1179673, 65536, 0, 1179674, 65536, 0, 1179675, 65536, 0, 1179676, 65536, 0, 1179677, 65536, 0, 1179678, 65536, 0, 1179679, 65536, 0, 1179680, 65536, 0, 1179681, 65536, 0, 1179682, 65536, 0, 1179683, 65536, 0, 1179684, 65536, 0, 1179685, 65536, 0, 1179686, 65536, 0, 1179687, 65536, 0, 1179688, 65536, 0, 1179689, 65536, 0, 1179690, 65536, 0, 1179691, 65536, 0, 1179692, 65536, 0, 1179693, 65536, 0, 1179694, 65536, 0, 1179695, 65536, 0, 1179696, 65536, 0, 1179697, 65536, 0, 1179698, 65536, 0, 1179699, 65536, 0)
+
+[node name="GroundEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_blhtf")]
+position = Vector2(192, 128)
+player = NodePath("../Player")
