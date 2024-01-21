@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwa3b8wtwyddj"]
+[gd_scene load_steps=8 format=3 uid="uid://cwa3b8wtwyddj"]
 
 [ext_resource type="PackedScene" uid="uid://6oaml7vrl8du" path="res://player.tscn" id="1_3y8qe"]
 [ext_resource type="Texture2D" uid="uid://c7dreqlr5xg5s" path="res://Art/tilemap.png" id="2_kedut"]
@@ -14,6 +14,12 @@ texture = ExtResource("2_kedut")
 [sub_resource type="TileSet" id="TileSet_1cw6g"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_mfss1")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqgpe"]
+size = Vector2(18, 186)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcc83"]
+size = Vector2(16, 184)
 
 [node name="MainScene" type="Node2D"]
 
@@ -35,3 +41,13 @@ layer_0/tile_data = PackedInt32Array(1179648, 65536, 0, 1179649, 65536, 0, 11796
 [node name="GroundEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_blhtf")]
 position = Vector2(192, 128)
 player = NodePath("../Player")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-8, 84)
+shape = SubResource("RectangleShape2D_oqgpe")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(296, 84)
+shape = SubResource("RectangleShape2D_rcc83")
