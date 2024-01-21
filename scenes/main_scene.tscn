@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwa3b8wtwyddj"]
+[gd_scene load_steps=9 format=3 uid="uid://cwa3b8wtwyddj"]
 
 [ext_resource type="PackedScene" uid="uid://6oaml7vrl8du" path="res://scenes/player.tscn" id="1_3y8qe"]
 [ext_resource type="Texture2D" uid="uid://c7dreqlr5xg5s" path="res://Art/tilemap.png" id="2_kedut"]
 [ext_resource type="PackedScene" uid="uid://1byb5l1f7tdp" path="res://scenes/ground_enemy.tscn" id="3_blhtf"]
+[ext_resource type="PackedScene" uid="uid://bjmckefpuju2v" path="res://scenes/flying_enemy.tscn" id="4_8qnos"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mfss1"]
 texture = ExtResource("2_kedut")
@@ -51,3 +52,7 @@ shape = SubResource("RectangleShape2D_oqgpe")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(296, 84)
 shape = SubResource("RectangleShape2D_rcc83")
+
+[node name="FlyingEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_8qnos")]
+position = Vector2(230, 28)
+player = NodePath("../Player")
