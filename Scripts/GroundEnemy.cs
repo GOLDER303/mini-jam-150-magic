@@ -84,13 +84,13 @@ public partial class GroundEnemy : CharacterBody2D
                 break;
 
             case States.Attacking:
-                if (sprite2D.FlipH)
+                if (Scale.Y > 0)
                 {
-                    direction = 1;
+                    direction = -1;
                 }
                 else
                 {
-                    direction = -1;
+                    direction = 1;
                 }
 
                 velocity.X = direction * attackSpeed;
