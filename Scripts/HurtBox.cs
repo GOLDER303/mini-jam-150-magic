@@ -23,11 +23,16 @@ public partial class HurtBox : Area2D
 
     private void OnAreaEntered(Area2D area2D)
     {
+        var hitterGroups = area2D.GetGroups();
+
         bool shouldBeHurt = false;
 
         foreach (var damagedByGroup in damagedByGroups)
         {
-            if (area2D.Owner.IsInGroup(damagedByGroup))
+            if (
+                hitterGroups.Contains(damagedByGroup)
+                || (area2D.Owner != null && area2D.Owner.IsInGroup(damagedByGroup))
+            )
             {
                 shouldBeHurt = true;
                 break;
