@@ -104,13 +104,13 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjwta"]
-size = Vector2(10, 11)
+size = Vector2(8, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s6iin"]
 size = Vector2(18, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2w63"]
-size = Vector2(9, 11)
+size = Vector2(10, 12)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
@@ -127,8 +127,7 @@ texture = ExtResource("2_ucty5")
 hframes = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, 2.5)
+position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_tjwta")
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -172,7 +171,6 @@ custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("healthBar")]
-visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_sbk8u")
@@ -180,5 +178,11 @@ healthBar = NodePath("../HealthBar")
 damagedByGroups = PackedStringArray("enemy", "enemy_bullet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(-0.5, 2.5)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_r2w63")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -33)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 100.0
