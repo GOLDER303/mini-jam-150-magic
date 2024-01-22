@@ -8,12 +8,18 @@ public partial class Player : CharacterBody2D
     [Export]
     public float JumpVelocity = -300.0f;
 
+    [Export]
+    private GameManager gameManager;
+
     private AnimationPlayer animationPlayer;
 
     public override void _Ready()
     {
         base._Ready();
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+        HealthBar healthBar = GetNode<HealthBar>("HealthBar");
+        healthBar.Death += OnDeath;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -76,5 +82,10 @@ public partial class Player : CharacterBody2D
 
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    private void OnDeath()
+    {
+        gameManager.GameOver();
     }
 }

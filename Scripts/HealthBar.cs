@@ -4,6 +4,9 @@ using Godot;
 
 public partial class HealthBar : HBoxContainer
 {
+    [Signal]
+    public delegate void DeathEventHandler();
+
     private List<ColorRect> healthRects = new();
     private int currentHealth;
     private int maxHealth;
@@ -27,8 +30,6 @@ public partial class HealthBar : HBoxContainer
     {
         currentHealth -= damageAmount;
 
-        GD.Print(currentHealth);
-
         for (int i = currentHealth; i < maxHealth; i++)
         {
             healthRects[i].Hide();
@@ -36,6 +37,8 @@ public partial class HealthBar : HBoxContainer
 
         if (currentHealth <= 0)
         {
+            EmitSignal("Death");
+
             GD.Print($"Death {Owner.Name}");
         }
     }
