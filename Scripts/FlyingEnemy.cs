@@ -29,6 +29,9 @@ public partial class FlyingEnemy : CharacterBody2D
         attackTimer = GetNode<Timer>("AttackTimer");
         shootingPoint = GetNode<Marker2D>("ShootingPoint");
 
+        HealthBar healthBar = GetNode<HealthBar>("HealthBar");
+        healthBar.Death += OnDeath;
+
         attackTimer.Timeout += OnAttackTimerTimeout;
 
         animationPlayer.Play("move");
@@ -77,5 +80,10 @@ public partial class FlyingEnemy : CharacterBody2D
         newBullet.LookAt(player.GlobalPosition);
 
         GetTree().Root.AddChild(newBullet);
+    }
+
+    private void OnDeath()
+    {
+        QueueFree();
     }
 }

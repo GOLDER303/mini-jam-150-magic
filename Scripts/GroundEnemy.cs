@@ -39,6 +39,9 @@ public partial class GroundEnemy : CharacterBody2D
         sprite2D = GetNode<Sprite2D>("Sprite2D");
         attackTimer = GetNode<Timer>("AttackTimer");
 
+        HealthBar healthBar = GetNode<HealthBar>("HealthBar");
+        healthBar.Death += OnDeath;
+
         attackTimer.Timeout += OnAttackTimerTimeout;
 
         animationPlayer.Play("move");
@@ -115,5 +118,10 @@ public partial class GroundEnemy : CharacterBody2D
     {
         currentState = States.Moving;
         animationPlayer.Play("move");
+    }
+
+    private void OnDeath()
+    {
+        QueueFree();
     }
 }
