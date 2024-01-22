@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwa3b8wtwyddj"]
+[gd_scene load_steps=10 format=3 uid="uid://cwa3b8wtwyddj"]
 
-[ext_resource type="PackedScene" uid="uid://6oaml7vrl8du" path="res://scenes/player.tscn" id="1_3y8qe"]
+[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_82g0f"]
 [ext_resource type="Texture2D" uid="uid://c7dreqlr5xg5s" path="res://Art/tilemap.png" id="2_kedut"]
 [ext_resource type="PackedScene" uid="uid://1byb5l1f7tdp" path="res://scenes/ground_enemy.tscn" id="3_blhtf"]
 [ext_resource type="PackedScene" uid="uid://bjmckefpuju2v" path="res://scenes/flying_enemy.tscn" id="4_8qnos"]
