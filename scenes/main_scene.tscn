@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwa3b8wtwyddj"]
+[gd_scene load_steps=12 format=3 uid="uid://cwa3b8wtwyddj"]
 
 [ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_82g0f"]
+[ext_resource type="PackedScene" uid="uid://6oaml7vrl8du" path="res://scenes/player.tscn" id="2_6qa8r"]
 [ext_resource type="Texture2D" uid="uid://c7dreqlr5xg5s" path="res://Art/tilemap.png" id="2_kedut"]
+[ext_resource type="PackedScene" uid="uid://bmwovl7wdu7dt" path="res://scenes/final_altar.tscn" id="3_3q7g7"]
 [ext_resource type="PackedScene" uid="uid://1byb5l1f7tdp" path="res://scenes/ground_enemy.tscn" id="3_blhtf"]
 [ext_resource type="PackedScene" uid="uid://bjmckefpuju2v" path="res://scenes/flying_enemy.tscn" id="4_8qnos"]
 
@@ -22,26 +24,35 @@ size = Vector2(18, 186)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rcc83"]
 size = Vector2(16, 184)
 
-[node name="MainScene" type="Node2D"]
+[sub_resource type="Environment" id="Environment_bl4hv"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.11
+glow_blend_mode = 1
+glow_hdr_threshold = 4.0
+
+[node name="MainScene" type="Node2D" node_paths=PackedStringArray("gameOverCanvasLayer", "youWonCanvasLayer")]
+script = ExtResource("1_82g0f")
+gameOverCanvasLayer = NodePath("GameOver")
+youWonCanvasLayer = NodePath("YouWon")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1152.0
-offset_bottom = 640.0
+offset_left = -480.0
+offset_top = -232.0
+offset_right = 2200.0
+offset_bottom = 360.0
 color = Color(0, 0, 0, 1)
 
-[node name="Player" parent="." instance=ExtResource("1_3y8qe")]
-position = Vector2(24, 128)
+[node name="Player" parent="." node_paths=PackedStringArray("gameManager") instance=ExtResource("2_6qa8r")]
+position = Vector2(64, 119)
+gameManager = NodePath("..")
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2(-40, -152)
+position = Vector2(-272, -152)
 tile_set = SubResource("TileSet_1cw6g")
 format = 2
 layer_0/name = "Ground"
-layer_0/tile_data = PackedInt32Array(1179648, 65536, 0, 1179649, 65536, 0, 1179650, 65536, 0, 1179651, 65536, 0, 1179652, 65536, 0, 1179653, 65536, 0, 1179654, 65536, 0, 1179655, 65536, 0, 1179656, 65536, 0, 1179657, 65536, 0, 1179658, 65536, 0, 1179659, 65536, 0, 1179660, 65536, 0, 1179661, 65536, 0, 1179662, 65536, 0, 1179663, 65536, 0, 1179664, 65536, 0, 1179665, 65536, 0, 1179666, 65536, 0, 1179667, 65536, 0, 1179668, 65536, 0, 1179669, 65536, 0, 1179670, 65536, 0, 1179671, 65536, 0, 1179672, 65536, 0, 1179673, 65536, 0, 1179674, 65536, 0, 1179675, 65536, 0, 1179676, 65536, 0, 1179677, 65536, 0, 1179678, 65536, 0, 1179679, 65536, 0, 1179680, 65536, 0, 1179681, 65536, 0, 1179682, 65536, 0, 1179683, 65536, 0, 1179684, 65536, 0, 1179685, 65536, 0, 1179686, 65536, 0, 1179687, 65536, 0, 1179688, 65536, 0, 1179689, 65536, 0, 1179690, 65536, 0, 1179691, 65536, 0, 1179692, 65536, 0, 1179693, 65536, 0, 1179694, 65536, 0, 1179695, 65536, 0, 1179696, 65536, 0, 1179697, 65536, 0, 1179698, 65536, 0, 1179699, 65536, 0)
-
-[node name="GroundEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_blhtf")]
-position = Vector2(192, 128)
-player = NodePath("../Player")
+layer_0/tile_data = PackedInt32Array(1179648, 65536, 0, 1179649, 65536, 0, 1179650, 65536, 0, 1179651, 65536, 0, 1179652, 65536, 0, 1179653, 65536, 0, 1179654, 65536, 0, 1179655, 65536, 0, 1179656, 65536, 0, 1179657, 65536, 0, 1179658, 65536, 0, 1179659, 65536, 0, 1179660, 65536, 0, 1179661, 65536, 0, 1179662, 65536, 0, 1179663, 65536, 0, 1179664, 65536, 0, 1179665, 65536, 0, 1179666, 65536, 0, 1179667, 65536, 0, 1179668, 65536, 0, 1179669, 65536, 0, 1179670, 65536, 0, 1179671, 65536, 0, 1179672, 65536, 0, 1179673, 65536, 0, 1179674, 65536, 0, 1179675, 65536, 0, 1179676, 65536, 0, 1179677, 65536, 0, 1179678, 65536, 0, 1179679, 65536, 0, 1179680, 65536, 0, 1179681, 65536, 0, 1179682, 65536, 0, 1179683, 65536, 0, 1179684, 65536, 0, 1179685, 65536, 0, 1179686, 65536, 0, 1179687, 65536, 0, 1179688, 65536, 0, 1179689, 65536, 0, 1179690, 65536, 0, 1179691, 65536, 0, 1179692, 65536, 0, 1179693, 65536, 0, 1179694, 65536, 0, 1179695, 65536, 0, 1179696, 65536, 0, 1179697, 65536, 0, 1179698, 65536, 0, 1179699, 65536, 0, 1179700, 65536, 0, 1179701, 65536, 0, 1179702, 65536, 0, 1179703, 65536, 0, 1179704, 65536, 0, 1179705, 65536, 0, 1179706, 65536, 0, 1179707, 65536, 0, 1179708, 65536, 0, 1179709, 65536, 0, 1179710, 65536, 0, 1179711, 65536, 0, 1179712, 65536, 0, 1179713, 65536, 0, 1179714, 65536, 0, 1179715, 65536, 0, 1179716, 65536, 0, 1179717, 65536, 0, 1179718, 65536, 0, 1179719, 65536, 0, 1179720, 65536, 0, 1179721, 65536, 0, 1179722, 65536, 0, 1179723, 65536, 0, 1179724, 65536, 0, 1179725, 65536, 0, 1179726, 65536, 0, 1179727, 65536, 0, 1179728, 65536, 0, 1179729, 65536, 0, 1179730, 65536, 0, 1179731, 65536, 0, 1179732, 65536, 0, 1179733, 65536, 0, 1179734, 65536, 0, 1179735, 65536, 0, 1179736, 65536, 0, 1179737, 65536, 0, 1179738, 65536, 0, 1179739, 65536, 0, 1179740, 65536, 0, 1179741, 65536, 0, 1179742, 65536, 0, 1179743, 65536, 0, 1179744, 65536, 0, 1179745, 65536, 0, 1179746, 65536, 0, 1179747, 65536, 0, 1179748, 65536, 0, 1179749, 65536, 0, 1179750, 65536, 0, 1179751, 65536, 0, 1179752, 65536, 0, 1179753, 65536, 0, 1179754, 65536, 0, 1179755, 65536, 0, 1179756, 65536, 0, 1179757, 65536, 0, 1179758, 65536, 0, 1179759, 65536, 0, 1179760, 65536, 0, 1179761, 65536, 0, 1179762, 65536, 0, 1179763, 65536, 0, 1179764, 65536, 0, 1179765, 65536, 0, 1179766, 65536, 0, 1179767, 65536, 0, 1179768, 65536, 0, 1179769, 65536, 0, 1179770, 65536, 0, 1179771, 65536, 0, 1179772, 65536, 0, 1179773, 65536, 0, 1179774, 65536, 0, 1179775, 65536, 0, 1179776, 65536, 0, 1179777, 65536, 0, 1179778, 65536, 0, 1179779, 65536, 0, 1179780, 65536, 0, 1179781, 65536, 0)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -50,9 +61,84 @@ position = Vector2(-8, 84)
 shape = SubResource("RectangleShape2D_oqgpe")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(296, 84)
+position = Vector2(1584, 88)
 shape = SubResource("RectangleShape2D_rcc83")
 
-[node name="FlyingEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_8qnos")]
-position = Vector2(196, 57)
-player = NodePath("../Player")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bl4hv")
+
+[node name="FinalAltar" parent="." node_paths=PackedStringArray("gameManager") instance=ExtResource("3_3q7g7")]
+position = Vector2(1144, 128)
+gameManager = NodePath("..")
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+offset_right = 288.0
+offset_bottom = 160.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="GameOver/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -11.5
+offset_right = 43.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+
+[node name="YouWon" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="YouWon"]
+offset_right = 288.0
+offset_bottom = 160.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="YouWon/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = -11.5
+offset_right = 43.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Won!"
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="FlyingEnemy" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("4_8qnos")]
+position = Vector2(664, 40)
+player = NodePath("../../Player")
+
+[node name="FlyingEnemy2" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("4_8qnos")]
+position = Vector2(1024, 40)
+player = NodePath("../../Player")
+
+[node name="GroundEnemy" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("3_blhtf")]
+position = Vector2(280, 128)
+player = NodePath("../../Player")
+
+[node name="GroundEnemy2" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("3_blhtf")]
+position = Vector2(559, 128)
+player = NodePath("../../Player")
+
+[node name="GroundEnemy3" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("3_blhtf")]
+position = Vector2(776, 128)
+player = NodePath("../../Player")
+
+[node name="GroundEnemy4" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("3_blhtf")]
+position = Vector2(1055, 128)
+player = NodePath("../../Player")
