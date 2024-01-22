@@ -20,6 +20,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox/HitBoxCollisionShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_ywab5"]
 resource_name = "attack1"
@@ -56,10 +68,10 @@ tracks/2/path = NodePath("HitBox/HitBoxCollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.8, 1),
+"times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_550xi"]
@@ -91,7 +103,7 @@ radius = 2.0
 height = 14.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s6iin"]
-size = Vector2(5, 3)
+size = Vector2(6, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7dqym"]
 size = Vector2(16, 8)
@@ -120,8 +132,9 @@ collision_mask = 0
 script = ExtResource("3_2dl8x")
 
 [node name="HitBoxCollisionShape" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(-5.5, 6.5)
+position = Vector2(-6, 6.5)
 shape = SubResource("RectangleShape2D_s6iin")
+disabled = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
@@ -143,8 +156,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -3.0
-offset_right = 3.0
+offset_left = -1.0
+offset_right = 1.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -155,9 +168,5 @@ script = ExtResource("5_rcgue")
 metadata/_edit_use_anchors_ = true
 
 [node name="Heart1" type="ColorRect" parent="HealthBar"]
-custom_minimum_size = Vector2(2, 2)
-layout_mode = 2
-
-[node name="Heart2" type="ColorRect" parent="HealthBar"]
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
